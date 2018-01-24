@@ -332,10 +332,10 @@ if iptables -N MY-HTTPS; then
 
 fi
 
-# If no prerouting rule exist for my service
-if ! iptables -n -L FORWARD | grep --quiet MY-HTTPS; then
+# If no input rule exist for my service
+if ! iptables -n -L INPUT | grep --quiet MY-HTTPS; then
 
-# add a natting rule for the traffic (same reason)
+# add an input rule for the traffic (same reason)
   iptables -I INPUT 5 -d 10.137.2.x -p tcp --dport 443 -m conntrack --ctstate NEW -j MY-HTTPS
 
 fi
